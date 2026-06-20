@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Quotation</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .title { font-size: 24px; font-weight: bold; }
+        .info { margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .totals { margin-top: 20px; text-align: right; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">Quotation</div>
+        <div>{{ quotation.quotation_number }}</div>
+    </div>
+    <div class="info">
+        <p><strong>Client ID:</strong> {{ quotation.client_id }}</p>
+        <p><strong>Status:</strong> {{ quotation.status }}</p>
+        <p><strong>Valid Until:</strong> {{ quotation.valid_until }}</p>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in quotation.line_items %}
+            <tr>
+                <td>{{ item.description }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>${{ "%.2f"|format(item.unit_price) }}</td>
+                <td>${{ "%.2f"|format(item.total_price) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="totals">
+        <p><strong>Subtotal:</strong> ${{ "%.2f"|format(quotation.subtotal) }}</p>
+        <p><strong>Discount ({{ "%.1f"|format(quotation.discount_percentage) }}%):</strong> -${{ "%.2f"|format(quotation.discount_amount) }}</p>
+        <p><strong>Tax ({{ "%.1f"|format(quotation.tax_percentage) }}%):</strong> +${{ "%.2f"|format(quotation.tax_amount) }}</p>
+        <h3><strong>Grand Total:</strong> ${{ "%.2f"|format(quotation.grand_total) }}</h3>
+    </div>
+</body>
+</html>

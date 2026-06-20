@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Proposal</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .title { font-size: 24px; font-weight: bold; }
+        .info { margin-bottom: 20px; }
+        .content { margin-top: 20px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">Business Proposal</div>
+    </div>
+    <div class="info">
+        <p><strong>Title:</strong> {{ proposal.title }}</p>
+        <p><strong>Client ID:</strong> {{ proposal.client_id }}</p>
+        <p><strong>Status:</strong> {{ proposal.status }}</p>
+        <p><strong>Version:</strong> {{ proposal.version }}</p>
+    </div>
+    <div class="content">
+        <h3>Description</h3>
+        <p>{{ proposal.description }}</p>
+        <h3>Scope of Work</h3>
+        <p>{{ proposal.scope_of_work }}</p>
+    </div>
+</body>
+</html>
